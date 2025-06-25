@@ -1,0 +1,107 @@
+#matrixContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#upgradeContainer
+{
+    width: 5rem;
+}
+
+header {
+    display: none;
+}
+
+.gameContainer
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#mainMenu {
+    margin-top: 20rem;
+    width: 55rem;
+    height: 15rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+#sellButton {
+    background-color: transparent;
+    font-size: 2rem;
+    border: none;
+}
+
+#sellButton:hover {
+    background-color: rgba(255, 255, 255, 0.445);
+    cursor: pointer;
+}
+
+#mainMenu button {
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+}
+
+#mainMenu button:hover {
+    border: solid;
+    background-color: rgba(255, 255, 255, 0.411);
+}
+
+#logo {
+    width: 55rem;
+    height: 10rem;
+}
+
+header {
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 10rem;
+}
+
+body {
+    background-image: url("images/images.jpg");
+    background-size: 64px;
+    user-select: none;
+
+}
+
+.woodCountContainer {
+    display: flex;
+    text-shadow: 1px 1px 2px rgb(255, 255, 255);
+    -webkit-text-stroke-width: 1px;
+    font-size: 1.3rem;
+    font-weight: 80;
+}
+
+.woodCountContainer img {
+    height: 4rem;
+    width: 4rem;
+}
+
+.moneyCountContainer {
+    display: flex;
+    text-shadow: 1px 1px 2px rgb(255, 255, 255);
+    -webkit-text-stroke-width: 1px;
+    font-size: 1.3rem;
+    font-weight: 80;
+}
+
+.moneyCountContainer img {
+    height: 4rem;
+    width: 4rem;
+}
+
+img[name="tree"]:hover {
+    background-color: rgba(255, 255, 255, 0.418);
+    cursor: url("images/axe.png"), auto;
+}
+
+img[name="rock"]:hover {
+    background-color: rgba(255, 255, 255, 0.418);
+    cursor: url("images/pickAxe.png"), auto;
+}

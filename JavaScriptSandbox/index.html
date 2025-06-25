@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatrixGame</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <header id="header">
+        <div class="woodCountContainer">
+            <img src="images/woodIcon.png" alt="">
+            <p id="woodCount">Wood: 0</p>
+
+            <img src="images/rock.png" alt="">
+            <p id="rockCount">Rocks: 0</p>
+        </div>  
+        <div class="moneyCountContainer">
+            <p id="moneyCount">Money: 0</p>
+        </div>
+        <button onclick="Sell()" id="sellButton">Sell</button>
+    </header>
+    <main>
+        <center>
+            <div class="gameContainer">
+                <div id="upgradeContainer"></div>
+                <div id="matrixContainer"></div>
+            </div>
+
+
+            <div id="mainMenu">
+                <img id="logo" src="images/logo.png" alt="">
+                <button id="gameStartButton" onclick="GameStart()">Play</button>
+            </div>
+
+        </center>
+    </main>
+</body>
+
+<script src="index.js"></script>
+
+</html>
