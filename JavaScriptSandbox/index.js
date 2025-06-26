@@ -1,71 +1,99 @@
 class Upgrade {
-  constructor(name, description, moneyCost, moreAxePowerValue) {
+  constructor(
+    name,
+    description,
+    moneyCost,
+    moreAxePowerValue,
+    morePickaxePowerValue
+  ) {
     this.name = name;
     this.description = description;
     this.moneyCost = moneyCost;
     this.moreAxePowerValue = moreAxePowerValue;
+    this.morePickaxePowerValue = morePickaxePowerValue;
   }
 }
 
+let mainMenuThemeAudio = new Audio("Audio/MainSong.mp3");
+mainMenuThemeAudio.loop = true;
+mainMenuThemeAudio.volume = 0.5;
+
+let ambianceAudio = new Audio("Audio/ambience.mp3");
+ambianceAudio.loop = true;
+ambianceAudio.volume = 0.3;
+
 let woodCollected = 0;
 
+let woodChopAudio = new Audio("Audio/woodChop.mp3");
+
 let rocksCollected = 0;
+
+let rockMineAudio = new Audio("Audio/rockMine.wav");
 
 let money = 0;
 
 let axePower = 1;
 
+let pickaxePower = 1;
+
 let upgradeLevel = -1;
 
 let upgrades = null;
+
 function GenerateUpgrades() {
-  var axeUpgrade1;
-  var axeUpgrade2;
-  var axeUpgrade3;
+  var upgrade1;
+  var upgrade2;
+  var upgrade3;
 
   if (upgradeLevel === 0) {
-    axeUpgrade1 = new Upgrade(
+    upgrade1 = new Upgrade(
       "Axe Upgrade I",
       "It upgrades your axe power by 1",
-      20,
-      1
+      40,
+      1,
+      0
     );
-    axeUpgrade2 = new Upgrade(
+    upgrade2 = new Upgrade(
       "Axe Upgrade II",
       "It upgrades your axe power by 2",
-      40,
-      2
+      60,
+      2,
+      0
     );
-    axeUpgrade3 = new Upgrade(
+    upgrade3 = new Upgrade(
       "Axe Upgrade III",
       "It upgrades your axe power by 4",
-      160,
-      4
+      320,
+      4,
+      0
     );
   } else if (upgradeLevel === 1) {
-    axeUpgrade1 = new Upgrade(
-      "Axe Upgrade IV",
-      "It upgrades your axe power by 6",
-      250,
+    upgrade1 = new Upgrade(
+      "Pickaxe Upgrade I",
+      "It upgrades your pickaxe power by 1",
+      500,
+      0,
       1
     );
-    axeUpgrade2 = new Upgrade(
-      "Axe Upgrade V",
-      "It upgrades your axe power by 10",
-      410,
+    upgrade2 = new Upgrade(
+      "Pickaxe Upgrade II",
+      "It upgrades your pickaxe power by 2",
+      820,
+      0,
       2
     );
-    axeUpgrade3 = new Upgrade(
-      "Axe Upgrade VI",
-      "It upgrades your axe power by 15",
-      560,
+    upgrade3 = new Upgrade(
+      "Pickaxe Upgrade III",
+      "It upgrades your pickaxe power by 2",
+      1120,
+      0,
       4
     );
   }
 
-  let axeArray = [axeUpgrade1, axeUpgrade2, axeUpgrade3];
+  let upgradeArray = [upgrade1, upgrade2, upgrade3];
 
-  return axeArray;
+  return upgradeArray;
 }
 
 function ShowUpgrades(axeArray) {
@@ -84,11 +112,16 @@ function ShowUpgrades(axeArray) {
 
     let moneyCost = document.createElement("p");
     upgradeDescr.className = "moneyCostText";
-    upgradeDescr.textContent = element.moneyCost;
+    upgradeDescr.textContent = "Cost: " + element.moneyCost;
 
     let upgradeButton = document.createElement("button");
     upgradeButton.className = "upgradeButton";
-    upgradeButton.value = element.moreAxePowerValue + " " + element.moneyCost;
+    upgradeButton.value =
+      element.moreAxePowerValue +
+      " " +
+      element.morePickaxePowerValue +
+      " " +
+      element.moneyCost;
     upgradeButton.onclick = BuyUpgrade;
     upgradeButton.textContent = "Buy";
 
@@ -100,9 +133,17 @@ function ShowUpgrades(axeArray) {
   });
 }
 
-function CheckForUpgrades() {
-  
+function SellChecker() {
+  let sellButton = document.getElementById("sellButton");
 
+  if (woodCollected > 0 || rocksCollected > 0) {
+    sellButton.style.backgroundColor = "rgba(43, 255, 0, 0.418)";
+  } else {
+    sellButton.style.backgroundColor = "rgba(255, 0, 0, 0.418)";
+  }
+}
+
+function CheckForUpgrades() {
   if (upgrades === null) {
     upgradeLevel++;
     console.log(upgradeLevel);
@@ -119,11 +160,19 @@ function CheckForUpgrades() {
 
 function GameStart() {
   setInterval(CheckForUpgrades, 100);
+  setInterval(SellChecker, 100);
+
+  mainMenuThemeAudio.play();
+  ambianceAudio.play();
 
   document.getElementById("header").style.display = "flex";
 
   document.getElementById("mainMenu").style.display = "none";
 
+  GenerateMap();
+}
+
+function GenerateMap() {
   let rows = 10;
   let columns = 25;
 
@@ -134,6 +183,8 @@ function GameStart() {
   }
 
   let matrixContainer = document.getElementById("matrixContainer");
+
+  matrixContainer.innerHTML = "";
 
   for (let i = 0; i < map.length; i++) {
     let rowContainer = document.createElement("div");
@@ -146,7 +197,7 @@ function GameStart() {
         imageContent.src = "images/tree.png";
         imageContent.name = "tree";
 
-        let damage = Math.floor(Math.random() * (6 - 3) + 3);
+        let damage = Math.floor(Math.random() * (15 - 5) + 5);
 
         imageContent.style.width = 4 + "rem";
         imageContent.style.height = 4 + "rem";
@@ -158,7 +209,7 @@ function GameStart() {
         imageContent.src = "images/rock.png";
         imageContent.name = "rock";
 
-        let damage = Math.floor(Math.random() * (10 - 4) + 4);
+        let damage = Math.floor(Math.random() * (20 - 10) + 10);
 
         imageContent.style.width = 3 + "rem";
         imageContent.style.height = 3 + "rem";
@@ -166,6 +217,11 @@ function GameStart() {
         imageContent.id = damage;
         imageContent.className = damage;
         imageContent.onclick = RockBreak;
+      } else if (13 % map[i][j] === 6) {
+        imageContent.src = "images/water.png";
+
+        imageContent.style.width = 4 + "rem";
+        imageContent.style.height = 4 + "rem";
       } else if (map[i][j] === 4) {
         imageContent.src = "images/flower.png";
         imageContent.name = "flower";
@@ -187,12 +243,13 @@ function GameStart() {
 function TreeBreak() {
   let treeDamage = Number(event.target.id);
 
+  woodChopAudio.play();
   treeDamage -= axePower;
   if (treeDamage > 0) {
     event.target.id = treeDamage;
   } else {
     event.target.style.visibility = "hidden";
-    woodCollected += Number(event.target.className);
+    woodCollected += Math.floor(Number(event.target.className) / 2);
     document.getElementById("woodCount").textContent = "Wood: " + woodCollected;
   }
 }
@@ -200,12 +257,13 @@ function TreeBreak() {
 function RockBreak() {
   let rockBreakDamage = Number(event.target.id);
 
-  rockBreakDamage -= axePower;
+  rockMineAudio.play();
+  rockBreakDamage -= pickaxePower;
   if (rockBreakDamage > 0) {
     event.target.id = rockBreakDamage;
   } else {
     event.target.style.visibility = "hidden";
-    rocksCollected += Number(event.target.className);
+    rocksCollected += Math.floor(Number(event.target.className) / 2);
     document.getElementById("rockCount").textContent =
       "Rocks: " + rocksCollected;
   }
@@ -224,19 +282,22 @@ function Sell() {
 function BuyUpgrade() {
   let upgradeValue = event.target.value.split(" ");
 
-  if (money >= upgradeValue[1]) {
+  if (money >= upgradeValue[2]) {
     axePower += Number(upgradeValue[0]);
-    money -= upgradeValue[1];
+    pickaxePower += Number(upgradeValue[1]);
+    document.getElementById("axePower").textContent = "Axe Power: " + axePower;
+    document.getElementById("pickaxePower").textContent =
+      "Pickaxe Power: " + pickaxePower;
+
+    money -= upgradeValue[2];
     document.getElementById("moneyCount").textContent = "Money: " + money;
 
     var foundUpgrade = upgrades.find(
-      (x) => x.name == event.target.parentNode.name
+      (x) => x.name == event.target.parentNode.getAttribute("name")
     );
-    console.log("Upgrades: " + upgrades);
     console.log("found Upgrade: " + foundUpgrade);
     if (foundUpgrade != null) {
       upgrades.splice(upgrades.indexOf(foundUpgrade), 1);
-      
     }
 
     event.target.parentNode.style.display = "none";

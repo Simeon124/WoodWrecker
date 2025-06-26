@@ -1,19 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+    background-image: url("images/images.jpg");
+    background-size: 64px;
+    user-select: none;
+
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
 #matrixContainer {
     display: flex;
     flex-direction: column;
 }
 
-#upgradeContainer
-{
-    width: 5rem;
-}
-
 header {
+    padding-bottom: 5px;
     display: none;
+    box-shadow: 5px 5px 5px black;
+    margin-bottom: 4rem !important;
 }
 
-.gameContainer
-{
+.gameContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -27,17 +38,48 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
 
+#woodCount
+{
+    margin-right: 2rem;
+}
+
+#pickaxePower
+{
+    margin-right: 2rem;
+}
+
+#axePower
+{
+    margin-right: 2rem;
 }
 
 #sellButton {
-    background-color: transparent;
     font-size: 2rem;
-    border: none;
+
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 #sellButton:hover {
-    background-color: rgba(255, 255, 255, 0.445);
+    font-size: 2.2rem;
+    cursor: pointer;
+}
+
+#sleepButton {
+    font-size: 2rem;
+
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#sleepButton:hover {
+    font-size: 2.2rem;
     cursor: pointer;
 }
 
@@ -63,14 +105,7 @@ header {
     margin-bottom: 10rem;
 }
 
-body {
-    background-image: url("images/images.jpg");
-    background-size: 64px;
-    user-select: none;
-
-}
-
-.woodCountContainer {
+.countContainer {
     display: flex;
     text-shadow: 1px 1px 2px rgb(255, 255, 255);
     -webkit-text-stroke-width: 1px;
@@ -78,7 +113,7 @@ body {
     font-weight: 80;
 }
 
-.woodCountContainer img {
+.countContainer img {
     height: 4rem;
     width: 4rem;
 }
@@ -104,4 +139,36 @@ img[name="tree"]:hover {
 img[name="rock"]:hover {
     background-color: rgba(255, 255, 255, 0.418);
     cursor: url("images/pickAxe.png"), auto;
+}
+
+#upgradeContainer {
+    width: 8.3rem;
+    background-color: rgba(0, 0, 0, 0.562);
+    border-top-right-radius: 2rem;
+    height: fit-content;
+
+}
+
+.upgrade {
+    padding: 2rem;
+}
+
+.upgradeTitle {
+    color: rgb(251, 255, 0);
+}
+
+.moneyCostText
+{
+    font-size: 1rem;
+    font-family: "VT323", monospace;
+    font-weight: 700;
+    font-style: normal;
+    color: greenyellow;
+}
+
+.upgradeButton
+{
+    font-size: 2rem;
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
 }
